@@ -19,7 +19,7 @@ cd foo
 
 # Pony library
 
-This is the Pony code we would like to call from Python. Let's name it `lib.pony`
+This is the Pony code we would like to call from Python. Let's name it `lib.pony` (prefix not important).
 ```pony
 actor@ Foo
   var counter: USize = 0
@@ -40,6 +40,9 @@ This needs to be compiled into a static library:
 pony -l
 ```
 This created `foo.h` and `libfoo.a`
+
+# Helper
+
 Since there seems to be an issue with Pony `0.37.0` we need a little helper C file. Let's name it `helper.c`
 
 ```c
@@ -50,6 +53,8 @@ void Main_runtime_override_defaults_oo(void* opt)
   return;
 }
 ```
+
+# Compiling
 
 Let's setup our build environement:
 
@@ -65,7 +70,7 @@ And now the build command:
 gcc -shared -o libfoo.so \
 	-I. -I $PONYRT_INCLUDE -I $PONYRT_COMMON \
 	-Wl,--whole-archive \
-		<PONYBUILDDIR>/build/release/libponyrt-pic.a \
+		$PONYRT_LIB \
 		helper.c \
 		libfoo.a \
 	-Wl,--no-whole-archive \
@@ -73,6 +78,8 @@ gcc -shared -o libfoo.so \
 ```
 
 We now have `libfoo.so`. `readelf -s libfoo.so` should confirm we have exported `Foo*` and `pony_*`
+
+# Usage
 
 And now to use the shared library we have to import it with `LoadLibrary` and call some Pony runtime setup functions.
 Setting argtypes and restypes is also required.
