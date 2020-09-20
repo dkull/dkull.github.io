@@ -21,23 +21,23 @@ cd foo
 
 This is the Pony code we would like to call from Python. Let's name it `lib.pony` (prefix not important).
 ```pony
-actor@ Foo
+actor@ GreetCounter
   var counter: USize = 0
 
   new create() =>
     None
 
-  fun val get_counter(): USize =>
+  fun val counter(): USize =>
     counter
 
-  be greet_and_increment() =>
+  be greet() =>
     @printf[I32]("Hi. %d\n".cstring(), counter)
     counter = counter + 1
 ```
 
 This needs to be compiled into a static library:
 ```bash
-pony -l
+ponyc -l
 ```
 This created `foo.h` and `libfoo.a`
 
@@ -91,21 +91,21 @@ from ctypes import *
 lib = cdll.LoadLibrary('./libfoo.so')
 
 lib.pony_init.argtypes = [c_int, c_char_p]
-lib.Foo_Alloc.restype = c_void_p
-lib.Foo_tag_greet_and_increment_o__send.argtypes = [c_void_p]
-lib.Foo_val_get_counter_Z.argtypes = [c_void_p]
+lib.GreetCounter_Alloc.restype = c_void_p
+lib.GreetCounter_tag_greet_o__send.argtypes = [c_void_p]
+lib.GreetCounter_val_counter_Z.argtypes = [c_void_p]
 
 lib.pony_init(1, c_char_p(b'name')) # argc and argv
 lib.pony_start(True, None, None)
-ptr = lib.Foo_Alloc()
+ptr = lib.GreetCounter_Alloc()
 
 for x in range(100):
-    lib.Foo_tag_greet_and_increment_o__send(ptr)
+    lib.GreetCounter_tag_greet_o__send(ptr)
 
 # pony actors are async, give a moment for them to finish
 time.sleep(0.1)
 
-assert lib.Foo_val_get_counter_Z(ptr) == 99
+assert lib.GreetCounter_val_counter_Z(ptr) == 99
 ```
 
 # Extra
