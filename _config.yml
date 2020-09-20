@@ -1,5 +1,6 @@
 github_username:  dkull
 theme: jekyll-theme-minimal
 permalink: /:title/
-name: TXT tanel.liiv.
+title: TXT tanel.liiv.
+description: Converting my thoughts to txt on topics such as software engineering, cryptography (dilettante), GNU/Linux, FOSS, etc.
 
