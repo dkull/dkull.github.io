@@ -27,7 +27,7 @@
         {% endif %}
 
         {% if site.github.is_user_page %}
-        <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
+        <p class="view"><a href="{{ site.github.owner_url }}">My GitHub</a></p>
         {% endif %}
 
         {% if site.show_downloads %}
@@ -37,6 +37,8 @@
           <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
         </ul>
         {% endif %}
+
+	<hr>
 
         {% for post in site.posts limit:10 %}
             <a href="{{ post.url }}">{{ post.title }} @ {{post.date | truncate: 10, ""}}</a>
