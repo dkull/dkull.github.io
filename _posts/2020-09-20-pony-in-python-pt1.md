@@ -65,7 +65,7 @@ And now the build command:
 gcc -shared -o libfoo.so \
 	-I. -I $PONYRT_INCLUDE -I $PONYRT_COMMON \
 	-Wl,--whole-archive \
-		../ponyc/build/release/libponyrt-pic.a \
+		<PONYBUILDDIR>/build/release/libponyrt-pic.a \
 		helper.c \
 		libfoo.a \
 	-Wl,--no-whole-archive \
@@ -84,7 +84,7 @@ lib = cdll.LoadLibrary('./libfoo.so')
 
 lib.pony_init.argtypes = [c_int, c_char_p]
 lib.Foo_Alloc.restype = c_void_p
-lib.Foo_tag_hi_o__send.argtypes = [c_void_p]
+lib.Foo_tag_greet_and_increment_o__send.argtypes = [c_void_p]
 lib.Foo_val_get_counter_Z.argtypes = [c_void_p]
 
 lib.pony_init(1, c_char_p(b'name')) # argc and argv
@@ -92,7 +92,7 @@ lib.pony_start(True, None, None)
 ptr = lib.Foo_Alloc()
 
 for x in range(100):
-    lib.Foo_tag_hi_o__send(ptr)
+    lib.Foo_tag_greet_and_increment_o__send(ptr)
 
 # pony actors are async, give a moment for them to finish
 time.sleep(0.1)
