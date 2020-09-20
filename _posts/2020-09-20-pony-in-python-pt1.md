@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "Using Pony from Python"
-date:   2020-09-20 19:28:00 +0300
-categories: pony python compilation ffi
+tags: pony python compilation ffi
 ---
 
 Using Pony code from Python would be really useful. So here's how to do it.
