@@ -39,7 +39,7 @@
         {% endif %}
 
         {% for post in site.posts limit:10 %}
-            <a href="{{ post.url }}">{{ post.title }} @ {{post.date | truncate: 13}}</a>
+            <a href="{{ post.url }}">{{ post.title }} @ {{post.date | truncate: 10, ""}}</a>
         {% endfor %}
 
       </header>
