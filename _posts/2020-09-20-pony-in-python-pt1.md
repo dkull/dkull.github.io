@@ -83,6 +83,7 @@ We now have `libfoo.so`. `readelf -s libfoo.so` should confirm we have exported 
 
 And now to use the shared library we have to import it with `LoadLibrary` and call some Pony runtime setup functions.
 Setting argtypes and restypes is also required.
+Let's name it `run.py`.
 
 ```python
 from ctypes import *
@@ -106,3 +107,29 @@ time.sleep(0.1)
 
 assert lib.Foo_val_get_counter_Z(ptr) == 99
 ```
+
+# Extra
+
+## Final directory tree
+The final directory tree should look like
+```
+foo$ tree
+.
+├── foo.h
+├── helper.c
+├── libfoo.a
+├── libfoo.so
+├── lib.pony
+└── run.py
+```
+
+## Building Pony
+```
+git clone https://github.com/ponylang/ponyc.git
+cd ponyc
+make libs
+make configure
+make build -j 8
+```
+
+
