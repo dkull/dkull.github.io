@@ -38,13 +38,9 @@
         </ul>
         {% endif %}
 
-        <ul>
         {% for post in site.posts limit:10 %}
-          <li>
             <a href="{{ post.url }}">{{ post.title }} @ {{post.date | truncate: 10}}</a>
-          </li>
         {% endfor %}
-        </ul>
 
       </header>
       <section>
