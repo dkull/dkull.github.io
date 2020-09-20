@@ -1,4 +1,4 @@
-## List of writings
+# Writings
 
 <ul>
   {% for post in site.posts %}
@@ -7,6 +7,8 @@
     </li>
   {% endfor %}
 </ul>
+
+# Tags
 
 {% for tag in site.tags %}
   <h3>{{ tag[0] }}</h3>
