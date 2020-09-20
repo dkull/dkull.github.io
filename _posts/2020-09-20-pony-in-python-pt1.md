@@ -76,7 +76,7 @@ gcc -shared -o libfoo.so \
 	-lpthread -ldl
 ```
 
-We now have `libfoo.so`. `readelf -s libfoo.so` should confirm we have exported `Foo*` and `pony_*`
+We now have `libfoo.so`. `readelf -s libfoo.so` should confirm we have exported `GreetCounter*` and `pony_*`
 
 # Usage
 
